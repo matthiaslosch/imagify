@@ -29,6 +29,12 @@ if [ -z "$positional" ]; then
     exit 1
 fi
 
+# Check if ImageMagick is installed
+if ! type "convert" &> /dev/null; then
+    echo "Error: Did not find 'convert' command. Is ImageMagick installed?"
+    exit 1
+fi
+
 binary_size=$(stat -c %s ${positional[0]})
 
 # Image dimesions: 512 x 512.
